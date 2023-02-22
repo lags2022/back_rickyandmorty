@@ -11,7 +11,7 @@ app.use(cors());
 app.use("/rickandmorty", getCharacters);
 
 app.get("/", (req, res) => {
-  res.send("bienvenido");
+  res.send("bienvenido a esta aplicacion");
 });
 
 module.exports = app;
