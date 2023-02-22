@@ -1,4 +1,3 @@
-// const data = require("../utils/data");
 const axios = require("axios");
 
 const getCharById = async (id) => {
