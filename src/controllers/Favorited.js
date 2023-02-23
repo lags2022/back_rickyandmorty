@@ -24,7 +24,7 @@ const createFavPg = async (data) => {
 
 const deleteFavorites = async (id) => {
   const deletfav = await Favorite.findByPk(id);
-  if (!deletfav) throw new Error("favorite not found");
+  // if (!deletfav) throw new Error("favorite not found");
   await deletfav.destroy();
   return deletfav;
 };
