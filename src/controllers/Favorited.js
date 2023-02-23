@@ -24,13 +24,13 @@ const createFavPg = async (data) => {
 
 const deleteFavorites = async (id) => {
   const deletfav = await Favorite.findByPk(id);
-  // if (!deletfav) throw new Error("favorite not found");
+  if (!deletfav) return {};
   await deletfav.destroy();
   return deletfav;
 };
 
 const resetFavorites = async () => {
-  await Favorite.destroy({ where: {} });// para borrar todos los elementos de una tabla.
+  await Favorite.destroy({ where: {} }); // para borrar todos los elementos de una tabla.
   return await Favorite.findAll();
 };
 
