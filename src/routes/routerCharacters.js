@@ -2,13 +2,36 @@ const { Router } = require("express");
 const getCharById = require("../controllers/getCharById");
 const getCharDetail = require("../controllers/getCharDetail");
 const {
-  getFavorites,
-  postFavorites,
+  // getFavorites,
+  // postFavorites,
   deleteFavorites,
   resetFavorites,
+  getFavPg,
+  createFavPg,
 } = require("../controllers/Favorited");
 
 const router = Router();
+
+router.get("/fav", async (req, res) => {
+  try {
+    const getFavs = await getFavPg();
+    return res.status(200).json(getFavs);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.post("/fav", async (req, res) => {
+  try {
+    const { id, name, image, gender } = req.body;
+    if (![id, name, image, gender].every(Boolean))
+      throw new Error("missing data favorites");
+    const createFavs = await createFavPg(req.body);
+    return res.status(200).json(createFavs);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 router.get("/character/:id", async (req, res) => {
   try {
@@ -28,39 +51,39 @@ router.get("/detail/:id", async (req, res) => {
   }
 });
 
-router.get("/fav", async (req, res) => {
+// router.get("/fav", async (req, res) => {
+//   try {
+//     const favorites = getFavorites();
+//     res.status(200).json(favorites);
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// });
+
+router.delete("/fav/reset", async (req, res) => {
   try {
-    const favorites = getFavorites();
+    const favorites = await resetFavorites();
     res.status(200).json(favorites);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
 
-router.get("/fav/reset", async (req, res) => {
-  try {
-    const favorites = resetFavorites();
-    res.status(200).json(favorites);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-
-router.post("/fav", async (req, res) => {
-  try {
-    const { id, name, image, gender } = req.body;
-    if (![id, name, image, gender].every(Boolean))
-      throw new Error("missing data");
-    const newFavorite = postFavorites(id, name, image, gender);
-    res.status(200).json(newFavorite);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
+// router.post("/fav", async (req, res) => {
+//   try {
+//     const { id, name, image, gender } = req.body;
+//     if (![id, name, image, gender].every(Boolean))
+//       throw new Error("missing data");
+//     const newFavorite = postFavorites(id, name, image, gender);
+//     res.status(200).json(newFavorite);
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// });
 
 router.delete("/fav/:id", async (req, res) => {
   try {
-    const deleteFav = deleteFavorites(+req.params.id);
+    const deleteFav = await deleteFavorites(+req.params.id);
     res.status(200).json(deleteFav);
   } catch (error) {
     res.status(400).json({ error: error.message });
