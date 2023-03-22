@@ -2,8 +2,6 @@ const { Router } = require("express");
 const getCharById = require("../controllers/getCharById");
 const getCharDetail = require("../controllers/getCharDetail");
 const {
-  // getFavorites,
-  // postFavorites,
   deleteFavorites,
   resetFavorites,
   getFavPg,
@@ -51,15 +49,6 @@ router.get("/detail/:id", async (req, res) => {
   }
 });
 
-// router.get("/fav", async (req, res) => {
-//   try {
-//     const favorites = getFavorites();
-//     res.status(200).json(favorites);
-//   } catch (error) {
-//     res.status(400).json({ error: error.message });
-//   }
-// });
-
 router.delete("/fav/reset", async (req, res) => {
   try {
     const favorites = await resetFavorites();
@@ -68,18 +57,6 @@ router.delete("/fav/reset", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-
-// router.post("/fav", async (req, res) => {
-//   try {
-//     const { id, name, image, gender } = req.body;
-//     if (![id, name, image, gender].every(Boolean))
-//       throw new Error("missing data");
-//     const newFavorite = postFavorites(id, name, image, gender);
-//     res.status(200).json(newFavorite);
-//   } catch (error) {
-//     res.status(400).json({ error: error.message });
-//   }
-// });
 
 router.delete("/fav/:id", async (req, res) => {
   try {
