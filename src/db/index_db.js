@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
 const favFunc = require("./models/Favorite");
+const userFunc = require("./models/User");
 
 // vuelve a descomentar esto cuando estes en local , vuelvo a comentarlo para que funcione en flyio
 require("dotenv").config();
@@ -16,6 +17,12 @@ const database = new Sequelize(
 // const database = new Sequelize(DATABASE_URL)
 
 favFunc(database);
+userFunc(database);
+
+//relacion de usuarios con favoritos es de n a n
+const { User, Favorite } = database.models;	
+User.belongsToMany(Favorite, { through: "User_Favorite" });
+Favorite.belongsToMany(User, { through: "User_Favorite" });
 
 console.log(database.models);
 
