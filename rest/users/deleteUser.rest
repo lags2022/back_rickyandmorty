@@ -1,0 +1,1 @@
+DELETE  http://localhost:3001/ramusers/users/3

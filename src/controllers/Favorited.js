@@ -1,13 +1,25 @@
-const { Favorite } = require("../db/index_db");
+const { Favorite, User } = require("../db/index_db");
 
-const getFavPg = async () => {
-  const favorites = await Favorite.findAll();
+const getFavPg = async (id) => {
+  const user = await User.findByPk(id);
+  const favorites = await user.getFavorites();
   return favorites;
 };
 
-const createFavPg = async (data) => {
-  const createFavs = await Favorite.create(data);
-  return createFavs;
+const createFavPg = async ({ id, name, image, gender, idUser }) => {
+  const user = await User.findOne({ where: { id: idUser } });
+  if (!user) throw new Error("User not found, favorited not assigned");
+  const [fav, boo] = await Favorite.findOrCreate({
+    where: { id },
+    defaults: {
+      id,
+      name,
+      image,
+      gender,
+    },
+  });
+  await fav.addUser(idUser);
+  return fav;
 };
 
 const deleteFavorites = async (id) => {

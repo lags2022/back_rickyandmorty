@@ -10,9 +10,10 @@ const {
 
 const router = Router();
 
-router.get("/fav", async (req, res) => {
+router.get("/fav/:id", async (req, res) => {
   try {
-    const getFavs = await getFavPg();
+    const { id } = req.params;
+    const getFavs = await getFavPg(id);
     return res.status(200).json(getFavs);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -21,8 +22,8 @@ router.get("/fav", async (req, res) => {
 
 router.post("/fav", async (req, res) => {
   try {
-    const { id, name, image, gender } = req.body;
-    if (![id, name, image, gender].every(Boolean))
+    const { id, name, image, gender, idUser } = req.body;
+    if (![id, name, image, gender, idUser].every(Boolean))
       throw new Error("missing data favorites");
     const createFavs = await createFavPg(req.body);
     return res.status(200).json(createFavs);

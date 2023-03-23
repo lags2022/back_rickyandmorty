@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(morgan("dev"))
 app.use(cors());
 app.use("/rickandmorty", Characters);
-app.use("/users", Users);
+app.use("/ramusers", Users);
 
 app.get("/", (req, res) => {
   res.send("bienvenido a esta aplicacion");

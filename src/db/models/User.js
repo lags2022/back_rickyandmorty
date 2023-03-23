@@ -10,8 +10,13 @@ const userFunc = (database) => {
         autoIncrement: true,
       },
       name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(20),
         allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "el nombre no puede estar vacio",
+          },
+        },
       },
       email: {
         type: DataTypes.STRING(40),
@@ -24,9 +29,13 @@ const userFunc = (database) => {
             msg: "el email no es valido",
           },
           notEmpty: {
-            msg: "el email no pu ede estar vacio",
+            msg: "el email no puede estar vacio",
           },
         },
+      },
+      date: {
+        type: DataTypes.DATEONLY,
+        defaultValue: DataTypes.NOW,
       },
       password: {
         type: DataTypes.STRING,
@@ -36,8 +45,8 @@ const userFunc = (database) => {
             msg: "la contraseña no puede estar vacia",
           },
           len: {
-            args: [7, 40],
-            msg: "la contraseña debe tener entre 7 y 40 caracteres",
+            args: [5, 40],
+            msg: "la contraseña debe tener entre 5 y 40 caracteres",
           },
         },
       },
