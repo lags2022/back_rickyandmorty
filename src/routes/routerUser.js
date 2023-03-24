@@ -1,10 +1,10 @@
 const router = require("express").Router();
 const { getUser, postUser, deleUser } = require("../controllers/users");
 
-router.get("/users", async (req, res) => {
+router.post("/users/login", async (req, res) => {
   try {
-    const { name } = req.query;
-    const user = !name ? await getUser() : await getUser(name);
+    const { email, password } = req.body;
+    const user = await getUser(email,password);
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ error: error.message });

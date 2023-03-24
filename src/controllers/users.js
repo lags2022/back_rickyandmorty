@@ -1,25 +1,47 @@
 const { User, Favorite } = require("../db/index_db");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 //despues arreglar
-const getUser = async (name) => {
-  const attributes = ["id", "name", "email"];
+const getUser = async (email, password) => {
+  const attributes = ["id", "name"];
   const include = {
     model: Favorite,
-    attributes: ["id", "name"],
+    attributes,
     through: { attributes: [] },
   };
-  const user = !name
-    ? await User.findAll({ attributes, include })
-    : await User.findOne({
-        where: { name },
-        attributes,
-        include,
-      });
-  return user;
+
+  const user = await User.findOne({
+    where: { email },
+    attributes: [...attributes, "passwordHash"],
+    include,
+  });
+
+  const passwordCorrect = !user
+    ? false
+    : await bcrypt.compare(password, user.passwordHash);
+
+  if (!(user && passwordCorrect)) throw new Error("Invalid email or password");
+
+  const userForToken = {
+    id: user.id,
+    name: user.name,
+  };
+
+  const token = jwt.sign(userForToken, process.env.SECRET, {
+    expiresIn: 60 * 60 * 24 * 7,
+  });
+
+  const { passwordHash, ...restOfuser } = user.toJSON();
+
+  return { ...restOfuser, token };
 };
 
 const postUser = async (name, email, password) => {
-  const user = await User.create({ name, email, password });
+  const saltRounds = 10;
+  const passwordHash = await bcrypt.hash(password, saltRounds);
+
+  const user = await User.create({ name, email, passwordHash });
   return user;
 };
 

@@ -37,18 +37,18 @@ const userFunc = (database) => {
         type: DataTypes.DATEONLY,
         defaultValue: DataTypes.NOW,
       },
-      password: {
+      passwordHash: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: "la contraseña no puede estar vacia",
-          },
-          len: {
-            args: [5, 40],
-            msg: "la contraseña debe tener entre 5 y 40 caracteres",
-          },
-        },
+        // validate: {
+        //   notEmpty: {
+        //     msg: "la contraseña no puede estar vacia",
+        //   },
+        //   len: {
+        //     args: [5, 40],
+        //     msg: "la contraseña debe tener entre 5 y 40 caracteres",
+        //   },
+        // },
       },
     },
     {
