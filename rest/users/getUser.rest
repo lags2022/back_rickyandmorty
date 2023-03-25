@@ -2,6 +2,6 @@ POST http://localhost:3001/ramusers/users/login
 Content-Type: application/json
 
 {
-  "email": "correo1@gmail.com",
+  "email": "luis@gmail.com",
   "password": "123456"
 }
