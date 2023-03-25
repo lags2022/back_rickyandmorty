@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 //despues arreglar
+
 const getUser = async (email, password) => {
   const attributes = ["id", "name"];
   const include = {
@@ -32,7 +33,7 @@ const getUser = async (email, password) => {
     expiresIn: 60 * 60 * 24 * 7,
   });
 
-  const { passwordHash, ...restOfuser } = user.toJSON();
+  const { passwordHash, id, ...restOfuser } = user.toJSON();
 
   return { ...restOfuser, token };
 };

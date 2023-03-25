@@ -1,10 +1,10 @@
 POST http://localhost:3001/rickandmorty/fav
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImFuZ2VsIiwiaWF0IjoxNjc5NzUwMDc0LCJleHAiOjE2ODAzNTQ4NzR9.KAthmeCtQjAF492eYTsSB3icgQVwO8i9lzFDXy9n_LE
 
 {
   "id": 1,
   "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
   "name": "Rick Sanchez",
-  "gender": "Male",
-  "idUser": 1
+  "gender": "Male"
 }

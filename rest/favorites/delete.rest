@@ -1,0 +1,2 @@
+DELETE  http://localhost:3001/rickandmorty/fav/reset
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Imx1aXMiLCJpYXQiOjE2Nzk2Njk5ODV9.YfX7kxet0AI9zTVZo829sAnbEi8GvPGHjclaGLZuwYg

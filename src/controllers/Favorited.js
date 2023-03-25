@@ -1,7 +1,7 @@
 const { Favorite, User } = require("../db/index_db");
 
-const getFavPg = async (id) => {
-  const user = await User.findByPk(id);
+const getFavPg = async (idUser) => {
+  const user = await User.findByPk(idUser);
   const favorites = await user.getFavorites();
   return favorites;
 };

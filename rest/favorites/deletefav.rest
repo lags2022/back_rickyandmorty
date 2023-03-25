@@ -1,0 +1,2 @@
+DELETE  http://localhost:3001/rickandmorty/fav/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImFuZ2VsIiwiaWF0IjoxNjc5NzUwNTQ1LCJleHAiOjE2ODAzNTUzNDV9.eghEa5AhtgcOfJC7QKMbNkESxod8ybwb2GuKg7VbEyU

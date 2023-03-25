@@ -1,1 +1,2 @@
-GET http://localhost:3001/rickandmorty/fav/1
+GET http://localhost:3001/rickandmorty/fav
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Imx1aXMiLCJpYXQiOjE2Nzk3NTAzMjMsImV4cCI6MTY4MDM1NTEyM30.3z8OF0naeM8QQ3ZcBg3_zJupWWPcQBuOyv7nrdP8izY

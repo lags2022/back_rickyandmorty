@@ -26,7 +26,7 @@ router.post("/fav", authorization, async (req, res) => {
     const { id, name, image, gender } = req.body;
     const { idUser } = req;
 
-    if (![id, name, image, gender].every(Boolean))
+    if (![id, name, image, gender, idUser].every(Boolean))
       throw new Error("missing data favorites");
 
     const createFavs = await createFavPg({ ...req.body, idUser });
