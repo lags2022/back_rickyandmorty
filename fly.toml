@@ -1,22 +1,19 @@
-# fly.toml file generated for rickback on 2023-02-23T11:55:25-05:00
+# fly.toml file generated for backrickandmorty on 2023-03-25T16:37:53-05:00
 
-app = "rickback"
+app = "backrickandmorty"
 kill_signal = "SIGINT"
 kill_timeout = 5
+mounts = []
+primary_region = "scl"
 processes = []
 
 [env]
   PORT = "8080"
 
-[experimental]
-  auto_rollback = true
-
 [[services]]
-  http_checks = []
   internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
-  script_checks = []
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
@@ -30,9 +27,3 @@ processes = []
   [[services.ports]]
     handlers = ["tls", "http"]
     port = 443
-
-  [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 0
-    timeout = "2s"
