@@ -4,4 +4,7 @@
 # production
 /build
 
+# environment variables
 .env
+.env.local
+.env.production

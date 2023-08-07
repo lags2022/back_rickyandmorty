@@ -12,15 +12,17 @@ const userFunc = require("./models/User");
 //   { logging: false }
 // );
 
-const DATABASE_URL=process.env.DATABASE_URL;
+const DATABASE_URL = process.env.DATABASE_URL;
 
 const database = new Sequelize(DATABASE_URL)
 
 favFunc(database);
 userFunc(database);
 
+console.log(process.env.SECRET)
+
 //relacion de usuarios con favoritos es de n a n
-const { User, Favorite } = database.models;	
+const { User, Favorite } = database.models;
 User.belongsToMany(Favorite, { through: "User_Favorite" });
 Favorite.belongsToMany(User, { through: "User_Favorite" });
 
