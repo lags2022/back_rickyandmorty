@@ -1,34 +1,34 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes } = require('sequelize')
 
 const favFunc = (database) => {
   database.define(
-    "Favorite",
+    'Favorite',
     {
       id: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
+        primaryKey: true
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
       image: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
       gender: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
       date: {
         type: DataTypes.DATEONLY,
-        defaultValue: DataTypes.NOW,
-      },
+        defaultValue: DataTypes.NOW
+      }
     },
     {
-      timestamps: false,
+      timestamps: false
     }
-  );
-};
+  )
+}
 
-module.exports = favFunc;
+module.exports = favFunc

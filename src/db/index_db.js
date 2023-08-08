@@ -1,30 +1,26 @@
-const { Sequelize } = require("sequelize");
-const favFunc = require("./models/Favorite");
-const userFunc = require("./models/User");
-require("dotenv").config();
+const { Sequelize } = require('sequelize')
+const favFunc = require('./models/Favorite')
+const userFunc = require('./models/User')
+require('dotenv').config()
 
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_DB } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_DB } = process.env
 
 const database = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DB}`,
   {
-    logging: false,
+    logging: false
   }
-);
+)
 
-// const DATABASE_URL = process.env.DATABASE_URL;
+favFunc(database)
+userFunc(database)
 
-// const database = new Sequelize(DATABASE_URL)
-
-favFunc(database);
-userFunc(database);
-
-//relacion de usuarios con favoritos es de n a n
-const { User, Favorite } = database.models;
-User.belongsToMany(Favorite, { through: "User_Favorite" });
-Favorite.belongsToMany(User, { through: "User_Favorite" });
+// relacion de usuarios con favoritos es de n a n
+const { User, Favorite } = database.models
+User.belongsToMany(Favorite, { through: 'User_Favorite' })
+Favorite.belongsToMany(User, { through: 'User_Favorite' })
 
 module.exports = {
   database,
-  ...database.models,
-};
+  ...database.models
+}
